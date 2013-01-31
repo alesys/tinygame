@@ -39,7 +39,7 @@ package chars
 		{
 			
 			x = stage.stageHeight;
-			y = Math.floor(Math.random()*(MAX_Y-MIN_Y)) + MIN_Y;
+			y = Math.round(Math.random()*(MAX_Y-MIN_Y)) + MIN_Y;
 			timer = new Timer(speed,9);
 			timer.addEventListener(TimerEvent.TIMER, tick,false,0,true);
 			timer.addEventListener(TimerEvent.TIMER_COMPLETE, done,false,0,true);
@@ -52,11 +52,11 @@ package chars
 		}
 		private function done(e:TimerEvent):void
 		{
-			parent.removeEventListener('pause',onPause);
-			parent.removeEventListener('unpause',onUnpause);
-			parent.removeEventListener('gameover',onGameOver);
+			if (parent) parent.removeEventListener('pause',onPause);
+			if (parent) parent.removeEventListener('unpause',onUnpause);
+			if (parent) parent.removeEventListener('gameover',onGameOver);
 			dispatchEvent(new Event(Event.COMPLETE));
-			if ( parent ) parent.removeChild(this);
+			if (parent) parent.removeChild(this);
 			
 		}
 		

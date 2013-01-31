@@ -22,6 +22,7 @@ package chars
 		{
 			// 38 up  40 down
 			//trace ( e.keyCode );
+			if (!Model.isRunning) return; 
 			switch( e.keyCode )
 			{
 				case 37:
@@ -38,7 +39,7 @@ package chars
 					break;
 				case 40:
 					y++;
-					if ( y > MAX_Y-1 ) y = MAX_Y-1;
+					if ( y > MAX_Y ) y = MAX_Y;
 					break;
 			}
 		}

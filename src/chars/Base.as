@@ -5,9 +5,9 @@ package chars
 	public class Base extends Sprite
 	{
 		public const MIN_Y:int = 2;
-		public const MAX_Y:int = 8;
+		public const MAX_Y:int = 7;
 		public const MIN_X:int = 0;
-		public const MAX_X:int = 8;
+		public const MAX_X:int = 7;
 		
 		public function Base()
 		{

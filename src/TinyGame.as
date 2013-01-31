@@ -23,7 +23,7 @@ package
 		private var pauseScreen:Sprite;
 		private var alertScreen:AlertScreen;
 		private var hero:Hero;
-		private var isRunning:Boolean;
+		
 		public function TinyGame()
 		{
 			alertScreen 	= new AlertScreen();
@@ -55,31 +55,29 @@ package
 				stage.removeEventListener(MouseEvent.CLICK, handleStart);
 				spawnEnemies();
 				alertScreen.hide();
-				isRunning = true;
+				Model.isRunning = true;
 			}
 		}
 		
 		private function pauseScreenHide():void
 		{
-			//pauseScreen.visible = false;
 			alertScreen.hide();
 		}
 		private function pauseScreenShow():void
 		{
-			//pauseScreen.visible = true;
 			alertScreen.pause();
 		}
 		
 		private function spawnEnemies():void
 		{
 			if (timer) timer.stop();
-			timer = new Timer(1000);
+			timer = new Timer(Model.SPAWN_RATE);
 			timer.addEventListener(TimerEvent.TIMER,spawnEnemy);
 			timer.start();
 		}
 		private function handle_activate(e:Event):void
 		{
-			if ( isRunning )
+			if ( Model.isRunning )
 			{
 				dispatchEvent(new Event('unpause'));
 				if(timer)timer.start();
@@ -107,7 +105,7 @@ package
 		{
 			if (hero.x==enemy.x&&hero.y==enemy.y)
 			{
-				isRunning = false;
+				Model.isRunning = false;
 				alertScreen.game_over();
 				if ( timer ) timer.stop();
 				ExternalInterface.call('showScore',"0b"+Util.dec2bin(Model.score,8).join(''));
